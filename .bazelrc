@@ -1,0 +1,3 @@
+build --action_env=CC=afl-clang-fast
+build --action_env=CXX=afl-clang-fast
+
