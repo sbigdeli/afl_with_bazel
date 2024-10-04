@@ -1,6 +1,6 @@
 cc_binary(
    name = "my_fuzz_target",
-   srcs = ["fuzz_target.cpp"],
+   srcs = ["fuzz_target.cpp", "mylib.cpp", "mylib.h"],
    copts = ["-fsanitize=fuzzer", "-g", "-O1", "-fno-omit-frame-pointer"], 
    linkopts = ["-fsanitize=fuzzer"],
    
