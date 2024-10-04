@@ -1,8 +1,0 @@
-# environment variables:
-AFL_CUSTOM_INFO_PROGRAM=/home/lengdahl/.cache/bazel/_bazel_lengdahl/78eac34f90554cb81867b4215b4f7c96/execroot/_main/bazel-out/k8-fastbuild/bin/my_fuzz_target
-AFL_CUSTOM_INFO_PROGRAM_ARGV=@@
-AFL_CUSTOM_INFO_OUT=/home/lengdahl/Desktop/afl_with_bazel/fuzz_output/default
-AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
-AFL_SKIP_CPUFREQ=1
-# command line:
-'afl-fuzz' '-i' '/home/lengdahl/Desktop/afl_with_bazel/test_inputs' '-o' '/home/lengdahl/Desktop/afl_with_bazel/fuzz_output' '--' '/home/lengdahl/.cache/bazel/_bazel_lengdahl/78eac34f90554cb81867b4215b4f7c96/execroot/_main/bazel-out/k8-fastbuild/bin/my_fuzz_target' '@@'

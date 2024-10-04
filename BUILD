@@ -3,21 +3,17 @@ cc_binary(
    srcs = ["fuzz_target.cpp"],
    copts = ["-fsanitize=fuzzer", "-g", "-O1", "-fno-omit-frame-pointer"], 
    linkopts = ["-fsanitize=fuzzer"],
-   
 )
 
 genrule(
    name = "afl_fuzz",
    srcs = [":my_fuzz_target", "test_inputs"],
-   outs = ["fuzz_output.zip"],  # Changed to a zip file for handling multiple outputs
+   outs = ["fuzz_logs.logs", "fuzz_output.tar"],  
    cmd = """
-   mkdir -p $(RULEDIR)/fuzz_output_dir && \
-   AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 \
-   afl-fuzz -V 10 -i $(location test_inputs) -o $(RULEDIR)/fuzz_output_dir -- $(location :my_fuzz_target) @@ && \
-   zip -r $(location fuzz_output.zip) $(RULEDIR)/fuzz_output_dir
+   mkdir -p fuzz_output && \
+   AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 afl-fuzz -V 10 -i $(location test_inputs) -o fuzz_output -- $(location :my_fuzz_target) @@ 2>&1 | tee $(location fuzz_logs.logs) && \
+   tar -czf $(location fuzz_output.tar) fuzz_output
    """,
-   tags = ["no-sandbox"],
-   executable = True,
 )
 
 
