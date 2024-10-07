@@ -16,7 +16,7 @@ genrule(
     name = "afl_fuzz_math",
     srcs = [":fuzz_target_math", "corpus_input"],
     outs = ["fuzz_output_math"],
-    cmd = "AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 afl-fuzz -V 10 -i $(location corpus_inputs) -o $(location fuzz_output_math) -- $(location :fuzz_target_math) @@",
+    cmd = "AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 afl-fuzz -V 10 -i $(location corpus_input) -o $(location fuzz_output_math) -- $(location :fuzz_target_math) @@",
     tags = ["no-sandbox"],
     executable = True,  
 )

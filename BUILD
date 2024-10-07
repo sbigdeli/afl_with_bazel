@@ -8,12 +8,10 @@ cc_binary(
 genrule(
    name = "afl_fuzz",
    srcs = [":my_fuzz_target", "test_inputs"],
-   outs = ["fuzz_logs.logs", "fuzz_output.tar"],  
-   cmd = """
-   mkdir -p fuzz_output && \
-   AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 afl-fuzz -V 10 -i $(location test_inputs) -o fuzz_output -- $(location :my_fuzz_target) @@ 2>&1 | tee $(location fuzz_logs.logs) && \
-   tar -czf $(location fuzz_output.tar) fuzz_output
-   """,
+   outs = ["fuzz_output"],
+   cmd = "AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1 AFL_SKIP_CPUFREQ=1 afl-fuzz -V 300 -i $(location test_inputs) -o $(location fuzz_output) -- $(location :my_fuzz_target) @@",
+   tags = ["no-sandbox"],
+   executable = True,  
 )
 
 
