@@ -9,6 +9,6 @@ genrule(
     name = "honggfuzz_fuzz",
     srcs = ["input_corpus", ":honggfuzz_target"],
     outs = ["output_dir"],
-    cmd = "honggfuzz -i $(location input_corpus) -o $(location output_dir) -- $(location :honggfuzz_target) ___FILE___",
+    cmd = "honggfuzz -i $(location input_corpus) -W $(location output_dir) -- $(location :honggfuzz_target) ___FILE___",
     executable = True,  
 )
