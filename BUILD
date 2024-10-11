@@ -3,7 +3,6 @@ cc_binary(
    srcs = ["fuzz_target.cpp", "mylib.cpp", "mylib.h"],
    copts = ["-fsanitize=fuzzer", "-g", "-O1", "-fno-omit-frame-pointer"], 
    linkopts = ["-fsanitize=fuzzer"],
-   
 )
 
 genrule(
@@ -14,4 +13,5 @@ genrule(
    tags = ["no-sandbox"],
    executable = True,  
 )
+
 
