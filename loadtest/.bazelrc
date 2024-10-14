@@ -1,0 +1,9 @@
+# Force the use of Clang for C++ builds.
+build --action_env=CC=clang
+build --action_env=CXX=clang++
+
+# Define the --config=asan-honggfuzz configuration.
+build:asan-honggfuzz \
+    --@rules_fuzzing//fuzzing:cc_engine=@rules_fuzzing//fuzzing/engines:honggfuzz \
+    --@rules_fuzzing//fuzzing:cc_engine_instrumentation=honggfuzz \
+    --@rules_fuzzing//fuzzing:cc_engine_sanitizer=asan
